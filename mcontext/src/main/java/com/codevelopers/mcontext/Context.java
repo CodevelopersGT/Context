@@ -7,13 +7,14 @@ import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 public class Context {
 
-    private Activity activity;
+    private FragmentActivity activity;
     private Fragment fragment;
 
-    public Context(@NonNull Activity activity){
+    public Context(@NonNull FragmentActivity activity){
 
         this.activity = activity;
     }
