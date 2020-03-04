@@ -19,7 +19,7 @@ public class Context {
         this.activity = activity;
     }
 
-    public Activity getActivity() {
+    public FragmentActivity getActivity() {
         return activity;
     }
 
