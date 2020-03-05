@@ -1,6 +1,5 @@
 package com.codevelopers.mcontext;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -14,7 +13,7 @@ public class Context {
     private FragmentActivity activity;
     private Fragment fragment;
 
-    public Context(@NonNull FragmentActivity activity){
+    public Context(@NonNull FragmentActivity activity) {
 
         this.activity = activity;
     }
@@ -27,11 +26,10 @@ public class Context {
         return fragment;
     }
 
-    public Context(@NonNull Fragment fragment){
+    public Context(@NonNull Fragment fragment) {
 
         this.fragment = fragment;
     }
-
 
 
     public android.content.Context getContext() {
@@ -43,7 +41,7 @@ public class Context {
         return activity.getApplicationContext();
     }
 
-    public void startActivityForResult(@NonNull Intent intent, int requestCode){
+    public void startActivityForResult(@NonNull Intent intent, int requestCode) {
 
         if (requestCode < 0)
             return;
@@ -54,7 +52,7 @@ public class Context {
             fragment.startActivityForResult(intent, requestCode);
     }
 
-    public boolean hasPermission(@NonNull String permission){
+    public boolean hasPermission(@NonNull String permission) {
 
 
         if (permission.trim().isEmpty())
@@ -67,29 +65,33 @@ public class Context {
         return getContext().checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED;
     }
 
-    public void requestPermission(@NonNull String permission, int requestCode){
+    public void requestPermission(@NonNull String[] permission, int requestCode) {
 
         if (requestCode < 0)
             return;
 
-        if (permission.trim().isEmpty())
-            return;
+
+        for (String mPermission : permission) {
+
+            if (mPermission == null || mPermission.trim().isEmpty())
+                throw new RuntimeException("is null or empty permission");
+        }
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
             return;
 
         if (activity != null)
-            activity.requestPermissions(new String[]{permission}, requestCode);
+            activity.requestPermissions(permission, requestCode);
         else if (fragment != null)
-            fragment.requestPermissions(new String[]{permission}, requestCode);
+            fragment.requestPermissions(permission, requestCode);
     }
 
-    public boolean isFragment(){
+    public boolean isFragment() {
 
         return fragment != null;
     }
 
-    public boolean isActivity(){
+    public boolean isActivity() {
 
         return activity != null;
     }
