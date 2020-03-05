@@ -12,5 +12,5 @@ allprojects {
 
 
 ```
-implementation 'com.github.CodevelopersGT:Context:v1.0.1'
+implementation 'com.github.CodevelopersGT:Context:v1.0.2'
 ```
